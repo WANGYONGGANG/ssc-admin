@@ -1,8 +1,8 @@
 {
-    "rewrites": [
+    "builds": [
         {
-            "source": "/:path*",
-            "destination": "/index.html"
+            "use": "@vercel/static-build",
+            "input": "dist"
         }
     ]
 }
