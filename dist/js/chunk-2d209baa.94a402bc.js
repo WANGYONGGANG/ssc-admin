@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d209baa"],{a9fb:function(n,e,c){"use strict";c.r(e);c("ac1f"),c("5319");var o=c("7a23"),t=Object(o["q"])({beforeRouteEnter:function(n,e,c){c((function(n){n.$router.replace(e)}))}});const a=t;e["default"]=a}}]);
