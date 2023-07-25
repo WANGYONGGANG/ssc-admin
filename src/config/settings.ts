@@ -71,7 +71,7 @@ export interface SettingsType {
 }
   
 const settings: SettingsType = {
-    siteTitle: 'ADMIN-ANTD-VUE',
+    siteTitle: '控制台',
     homeRouteItem: {
         icon: 'control',
         title: 'index-layout.menu.home.workplace',

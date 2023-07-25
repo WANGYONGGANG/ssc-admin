@@ -35,7 +35,7 @@
 
                 <right-top-user />
 
-                <select-lang class="indexlayout-top-selectlang" />
+                <!-- <select-lang class="indexlayout-top-selectlang" /> -->
 
             </div>
         </div>

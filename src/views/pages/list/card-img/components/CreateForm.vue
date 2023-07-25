@@ -12,18 +12,8 @@
         </template>
         
         <a-form :labelCol="{ span: 4 }" :wrapper-col="{span:20}">
-            <a-form-item label="位置" v-bind="validateInfos.type">
-                <TypeSelect v-model:value="modelRef.type" placeholder="请选择" />
-            </a-form-item>
-            <a-form-item label="名称" v-bind="validateInfos.name">
-                <a-input v-model:value="modelRef.name" placeholder="请输入名称" />
-            </a-form-item>
-            <a-form-item label="网址" v-bind="validateInfos.href">
-                <a-input v-model:value="modelRef.href" placeholder="请输入网址" />
-            </a-form-item>
-
-            <a-form-item label="备注" v-bind="validateInfos.desc">
-                <a-input v-model:value="modelRef.desc" placeholder="请输入备注" />
+             <a-form-item label="手机号" v-bind="validateInfos.name">
+                <a-input v-model:value="modelRef.mobile" placeholder="请输入手机号" />
             </a-form-item>
         </a-form>
 
@@ -76,44 +66,22 @@ export default defineComponent({
 
         // 表单值
         const modelRef = reactive<Omit<TableListItem, 'id'>>({
-            name: '',
-            desc: '',
-            href: '',
-            type: ''
+            mobile: '',
         });
         // 表单验证
         const rulesRef = reactive({
-            name: [
+            mobile: [
                 {
                     required: true,
                     validator: async (rule: any, value: string) => {
                         if (value === '' || !value) {
-                            throw new Error('请输入名称');
-                        } else if (value.length > 15) {
-                            throw new Error('长度不能大于15个字');
+                            throw new Error('请输入手机号');
+                        } else if (value.length > 11) {
+                            throw new Error('长度不能大于11个字符');
                         }
                     }
                 },
-            ],
-            desc: [], 
-            href: [
-                {
-                    required: true,
-                    validator: async (rule: any, value: string) => {
-                        if (value === '' || !value) {
-                            throw new Error('请输入网址');
-                        } else if (!/^(https?:)/.test(value)) {
-                            throw new Error('请输入正确的网址');
-                        }
-                    },
-                },
-            ],
-            type: [
-                {
-                    required: true,
-                    message: '请选择'
-                }
-            ]         
+            ],     
         });
         // 获取表单内容
         const { resetFields, validate, validateInfos } = useForm(modelRef, rulesRef);

@@ -26,15 +26,15 @@
                 </template>
 
 
-                <template #name="{ text, record  }">
-                    <a :href="record.href" target="_blank">{{text}}</a>
+                <template #imgsrc="{ text, record  }">
+                    <a :href="record.imgsrc" target="_blank">{{text}}</a>
                 </template>
-                <template #type="{ record }">
-                    <a-tag v-if="record.type === 'header'" color="green">头部</a-tag>
-                    <a-tag v-else color="cyan">底部</a-tag>
+                <template #status="{ record }">
+                    <a-tag v-if="record.status == '1'" color="green">已登记</a-tag>
+                    <a-tag v-else color="cyan">未登记</a-tag>
                 </template>
                 <template #action="{ record }">
-                    <a-button type="link" @click="() => detailUpdateData(record.id)" :loading="detailUpdateLoading.includes(record.id)">编辑</a-button>
+                    <a-button type="link" @click="() => detailUpdateData(record.id)" :loading="detailUpdateLoading.includes(record.id)">转移</a-button>
                     <a-button type="link" @click="() => deleteTableData(record.id)" :loading="deleteLoading.includes(record.id)">删除</a-button>
                 </template>
 
@@ -77,7 +77,7 @@ import SearchDrawer from './components/SearchDrawer.vue';
 import { StateType as ListStateType } from "./store";
 import { PaginationConfig, TableListItem } from './data.d';
 
-interface ListHighlyAdaptiveTablePageSetupData {
+interface ListcardImgPageSetupData {
     columns: any;
     list: ComputedRef<TableListItem[]>;
     pagination: ComputedRef<PaginationConfig>;
@@ -102,23 +102,23 @@ interface ListHighlyAdaptiveTablePageSetupData {
 }
 
 export default defineComponent({
-    name: 'ListHighlyAdaptiveTablePage',
+    name: 'ListcardImgPage',
     components: {
         ScreenTable,
         CreateForm,
         UpdateForm,
         SearchDrawer
     },
-    setup(): ListHighlyAdaptiveTablePageSetupData {
+    setup(): ListcardImgPageSetupData {
 
-        const store = useStore<{ ListHighlyAdaptiveTable: ListStateType}>();
+        const store = useStore<{ ListcardImg: ListStateType}>();
 
 
         // 列表数据
-        const list = computed<TableListItem[]>(() => store.state.ListHighlyAdaptiveTable.tableData.list);
+        const list = computed<TableListItem[]>(() => store.state.ListcardImg.tableData.list);
 
         // 列表分页
-        const pagination = computed<PaginationConfig>(() => store.state.ListHighlyAdaptiveTable.tableData.pagination);
+        const pagination = computed<PaginationConfig>(() => store.state.ListcardImg.tableData.pagination);
 
         // 列表字段
         const columns =[
@@ -129,18 +129,26 @@ export default defineComponent({
                 customRender: ({text, index}: { text: any; index: number}) => (pagination.value.current - 1) * pagination.value.pageSize + index + 1,
             },
             {
-                title: '名称',
-                dataIndex: 'name',
-                slots: { customRender: 'name' },
+                title: '整图',
+                dataIndex: 'imgsrc',
+                slots: { customRender: 'imgsrc' },
             },
             {
-                title: '备注',
+                title: '作品名称',
+                dataIndex: 'name',
+            },
+         {
+                title: '版次',
                 dataIndex: 'desc',
             },
             {
-                title: '位置',
-                dataIndex: 'type',
-                slots: { customRender: 'type' },
+                title: '版号',
+                dataIndex: 'num',
+            },
+            {
+                title: '状态',
+                dataIndex: 'status',
+                slots: { customRender: 'status' },
             },
             {
                 title: '操作',
@@ -154,7 +162,7 @@ export default defineComponent({
         const loading = ref<boolean>(true);
         const getList = async (current: number): Promise<void> => {
             loading.value = true;
-            await store.dispatch('ListHighlyAdaptiveTable/queryTableData', {
+            await store.dispatch('ListcardImg/queryTableData', {
                 per: pagination.value.pageSize,
                 page: current,
             });
@@ -172,7 +180,7 @@ export default defineComponent({
         // 新增弹框 - 提交
         const createSubmit = async (values: Omit<TableListItem, 'id'>, resetFields: (newValues?: Props | undefined) => void) => {
             createSubmitLoading.value = true;
-            const res: boolean = await store.dispatch('ListHighlyAdaptiveTable/createTableData',values);
+            const res: boolean = await store.dispatch('ListcardImg/createTableData',values);
             if(res === true) {
                 resetFields();
                 setCreateFormVisible(false);
@@ -190,14 +198,14 @@ export default defineComponent({
         }
         const updataFormCancel = () => {
             setUpdateFormVisible(false);
-            store.commit('ListHighlyAdaptiveTable/setUpdateData',{});
+            store.commit('ListcardImg/setUpdateData',{});
         }
         // 编辑弹框 - 提交 loading
         const updateSubmitLoading = ref<boolean>(false);
         // 编辑弹框 - 提交
         const updateSubmit = async (values: TableListItem, resetFields: (newValues?: Props | undefined) => void) => {
             updateSubmitLoading.value = true;
-            const res: boolean = await store.dispatch('ListHighlyAdaptiveTable/updateTableData',values);
+            const res: boolean = await store.dispatch('ListcardImg/updateTableData',values);
             if(res === true) {
                 updataFormCancel();                
                 message.success('编辑成功！');
@@ -207,11 +215,11 @@ export default defineComponent({
         }
 
         // 编辑弹框 data
-        const updateData = computed<Partial<TableListItem>>(() => store.state.ListHighlyAdaptiveTable.updateData);
+        const updateData = computed<Partial<TableListItem>>(() => store.state.ListcardImg.updateData);
         const detailUpdateLoading = ref<number[]>([]);
         const detailUpdateData = async (id: number) => {
             detailUpdateLoading.value = [id];
-            const res: boolean = await store.dispatch('ListHighlyAdaptiveTable/queryUpdateData',id);
+            const res: boolean = await store.dispatch('ListcardImg/queryUpdateData',id);
             if(res===true) {
                 setUpdateFormVisible(true);
             }
@@ -230,7 +238,7 @@ export default defineComponent({
                 cancelText: '取消',
                 onOk: async () => {
                     deleteLoading.value = [id];
-                    const res: boolean = await store.dispatch('ListHighlyAdaptiveTable/deleteTableData',id);
+                    const res: boolean = await store.dispatch('ListcardImg/deleteTableData',id);
                     if (res === true) {
                         message.success('删除成功！');
                         getList(pagination.value.current);

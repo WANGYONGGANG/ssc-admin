@@ -1,8 +1,8 @@
 <template>
     <div class="user-layout">      
-      <div class="lang">
+      <!-- <div class="lang">
         <SelectLang />
-      </div>
+      </div> -->
       <router-view></router-view>
     </div>
 </template>

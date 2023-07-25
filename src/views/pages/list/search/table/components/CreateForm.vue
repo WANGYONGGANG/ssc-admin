@@ -76,10 +76,7 @@ export default defineComponent({
 
         // 表单值
         const modelRef = reactive<Omit<TableListItem, 'id'>>({
-            name: '',
-            desc: '',
-            href: '',
-            type: ''
+            mobile: ''
         });
         // 表单验证
         const rulesRef = reactive({

@@ -59,21 +59,22 @@ mock[`POST ${VUE_APP_APIHOST || ''}/pages/form`] = (req, res) => {
 
 mock[`GET ${VUE_APP_APIHOST || ''}/pages/list`] = (req, res) => {
   res.send({
-    code: 0,
-    data: mockjs.mock({
-      total: 1000,
-      currentPage: 1,
-      'list|10': [
-        {
-          id: '@integer(1)',
-          'name|1': ['个人博客', '网页小功能'],
-          'desc|1': ['李庆松的个人博客', '原创定制最好的网页插件小功能'],
-          'href|1': ['http://liqingsong.cc', 'http://wyxgn.com'],
-          'type|1': ['header', 'footer'],
-        },
-      ],
-    }),
-  });
+		code: 0,
+		data: mockjs.mock({
+			total: 1000,
+			currentPage: 1,
+			"list|10": [
+				{
+					id: "@integer(1)",
+					"name|1": ["版画233", "版画55553"],
+					"desc|1": ["版次1", "版次2"],
+					"imgsrc|1": ["", ""],
+					"num|1": ["版号1", "版号33"],
+					"status|1": ["1", "0"],
+				},
+			],
+		}),
+	});
 };
 
 mock[`POST ${VUE_APP_APIHOST || ''}/pages/list`] = (req, res) => {

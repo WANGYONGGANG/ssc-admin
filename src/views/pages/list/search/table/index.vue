@@ -13,18 +13,18 @@
                         </a-form-item>
                     </a-col>
                     <a-col :xs="24" :sm="24" :md="24" :lg="6" :xl="6">
-                        <a-form-item  label="链接：" v-bind="searchValidateInfos.href">
-                            <a-input placeholder="请输入" v-model:value="searchModelRef.href" />
+                        <a-form-item  label="版次：" v-bind="searchValidateInfos.desc">
+                            <a-input placeholder="请输入" v-model:value="searchModelRef.desc" />
                         </a-form-item>
                     </a-col>
                     <a-col :xs="24" :sm="24" :md="24" :lg="6" :xl="6">
-                        <a-form-item  label="位置：" v-bind="searchValidateInfos.type">
-                            <TypeSelect placeholder="请选择" v-model:value="searchModelRef.type" />
+                        <a-form-item  label="版号：" v-bind="searchValidateInfos.num">
+                            <a-input placeholder="请输入" v-model:value="searchModelRef.num" />
                         </a-form-item>
                     </a-col>
                     <a-col v-if='searchOpen' :xs="24" :sm="24" :md="24" :lg="6" :xl="6">
-                        <a-form-item label="备注：" v-bind="searchValidateInfos.desc">
-                            <a-input placeholder="请输入" v-model:value="searchModelRef.desc" />
+                        <a-form-item label="手机号：" v-bind="searchValidateInfos.mobile">
+                            <a-input placeholder="手机号" v-model:value="searchModelRef.mobile" />
                         </a-form-item>
                     </a-col>
                     <a-col :xs="24" :sm="24" :md="24" :lg="6" :xl="6">
@@ -47,7 +47,7 @@
 
 
         <a-card :bordered="false">
-            <template #title>
+            <!-- <template #title>
                 <a-button type="primary" @click="() => setCreateFormVisible(true)">新增</a-button>
             </template>
             <template #extra>
@@ -57,7 +57,7 @@
                         <a-radio-button value="footer">底部</a-radio-button>
                     </a-radio-group>
                     <a-input-search placeholder="请输入"  style="width:270px;margin-left: 16px;" />
-            </template>
+            </template> -->
 
             <a-table
                 row-key="id"
@@ -71,18 +71,13 @@
                     }
                 }"
             >
-                <template #name="{ text, record  }">
-                    <a :href="record.href" target="_blank">{{text}}</a>
+                <template #imgsrc="{ text, record  }">
+                    <a :desc="record.imgsrc" target="_blank">{{text}}</a>
                 </template>
-                <template #type="{ record }">
-                    <a-tag v-if="record.type === 'header'" color="green">头部</a-tag>
-                    <a-tag v-else color="cyan">底部</a-tag>
+                <template #status="{ record }">
+                    <a-tag v-if="record.status == '1'" color="green">已登记</a-tag>
+                    <a-tag v-else color="cyan">未登记</a-tag>
                 </template>
-                <template #action="{ record }">
-                    <a-button type="link" @click="() => detailUpdateData(record.id)" :loading="detailUpdateLoading.includes(record.id)">编辑</a-button>
-                    <a-button type="link" @click="() => deleteTableData(record.id)" :loading="deleteLoading.includes(record.id)">删除</a-button>
-                </template>
-
             </a-table>
 
             <create-form 
@@ -137,8 +132,6 @@ interface ListSearchTablePageSetupData {
     updataFormCancel:  () => void;
     updateSubmitLoading: Ref<boolean>;
     updateSubmit:  (values: TableListItem, resetFields: (newValues?: Props | undefined) => void) => Promise<void>;
-    deleteLoading: Ref<number[]>;
-    deleteTableData:  (id: number) => void;
     searchOpen: Ref<boolean>;
     setSearchOpen: () => void;
     searchModelRef: Omit<TableListItem, 'id'>;
@@ -176,24 +169,26 @@ export default defineComponent({
                 customRender: ({text, index}: { text: any; index: number}) => (pagination.value.current - 1) * pagination.value.pageSize + index + 1,
             },
             {
-                title: '名称',
-                dataIndex: 'name',
-                slots: { customRender: 'name' },
+                title: '整图',
+                dataIndex: 'imgsrc',
+                slots: { customRender: 'imgsrc' },
             },
             {
-                title: '备注',
+                title: '作品名称',
+                dataIndex: 'name',
+            },
+         {
+                title: '版次',
                 dataIndex: 'desc',
             },
             {
-                title: '位置',
-                dataIndex: 'type',
-                slots: { customRender: 'type' },
+                title: '版号',
+                dataIndex: 'num',
             },
             {
-                title: '操作',
-                key: 'action',
-                width: 200,
-                slots: { customRender: 'action' },
+                title: '状态',
+                dataIndex: 'status',
+                slots: { customRender: 'status' },
             },
         ];
 
@@ -265,26 +260,6 @@ export default defineComponent({
             detailUpdateLoading.value = [];
         }
 
-        // 删除 loading
-        const deleteLoading = ref<number[]>([]);
-        // 删除
-        const deleteTableData = (id: number) => {
-            Modal.confirm({
-                title: '删除',
-                content: '确定删除吗？',
-                okText: '确认',
-                cancelText: '取消',
-                onOk: async () => {
-                    deleteLoading.value = [id];
-                    const res: boolean = await store.dispatch('ListSearchTable/deleteTableData',id);
-                    if (res === true) {
-                        message.success('删除成功！');
-                        getList(pagination.value.current);
-                    }
-                   deleteLoading.value = [];
-                }
-            });
-        }
 
         // 搜索
         const searchOpen = ref<boolean>(false);
@@ -293,17 +268,16 @@ export default defineComponent({
         }
         // 表单值
         const searchModelRef = reactive<Omit<TableListItem, 'id'>>({
-            name: '',
-            desc: '',
-            href: '',
-            type: ''
+            mobile: '',
         });
         // 表单验证
         const searchRulesRef = reactive({
+            imgsrc: [],
             name: [],
             desc: [], 
-            href: [],
-            type: []         
+            num: [],
+            mobile: [],
+            status: []         
         });
         // 获取表单内容
         const { resetFields, validate, validateInfos } = useForm(searchModelRef, searchRulesRef);
@@ -342,8 +316,6 @@ export default defineComponent({
             updataFormCancel,
             updateSubmitLoading,
             updateSubmit,
-            deleteLoading,
-            deleteTableData,
             searchOpen,
             setSearchOpen,
             searchModelRef,

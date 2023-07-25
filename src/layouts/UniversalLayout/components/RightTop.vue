@@ -33,7 +33,7 @@
           <div class="universallayout-right-top-logo">
               <router-link to="/" class="logo-url">
                   <img alt="" src="../../../assets/images/logo.png" width="30">
-                  <h3 class="logo-title">AdminAntdVue</h3>
+                  <h3 class="logo-title">控制台</h3>
               </router-link>
           </div>
           <div class="universallayout-top-menu">

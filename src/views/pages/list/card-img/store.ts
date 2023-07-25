@@ -46,7 +46,7 @@ const initState: StateType = {
 
 const StoreModel: ModuleType = {
     namespaced: true,
-    name: 'ListHighlyAdaptiveTable',
+    name: 'ListcardImg',
     state: {
         ...initState
     },
@@ -85,7 +85,7 @@ const StoreModel: ModuleType = {
                 return false;
             }
         },
-        async createTableData({ commit }, payload: Pick<TableListItem, "name" | "desc" | "href" | "type"> ) {
+        async createTableData({ commit }, payload: Pick<TableListItem, "mobile"> ) {
             try {
                 await createData(payload);
                 return true;
