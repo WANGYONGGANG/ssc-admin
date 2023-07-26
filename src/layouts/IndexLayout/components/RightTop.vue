@@ -31,7 +31,8 @@
             </div>
             <div class="indexlayout-top-menu-right">
 
-                <right-top-message />
+                <!-- <right-top-message /> -->
+                <span class="indexlayout-top-message"></span>
 
                 <right-top-user />
 

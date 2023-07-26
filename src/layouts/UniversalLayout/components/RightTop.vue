@@ -18,7 +18,7 @@
           </div>
           <div class="universallayout-top-menu-right">
 
-              <right-top-message />
+              <!-- <right-top-message /> -->
 
               <right-top-user />
 
@@ -46,11 +46,11 @@
           </div>
           <div class="universallayout-top-menu-right">
 
-              <right-top-message />
+              <!-- <right-top-message /> -->
 
               <right-top-user />
 
-              <select-lang class="universallayout-top-selectlang" />
+              <!-- <select-lang class="universallayout-top-selectlang" /> -->
 
               <settings></settings>
 
