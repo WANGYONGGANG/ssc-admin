@@ -13,6 +13,10 @@ export interface PaginationConfig {
 
 export interface TableListItem {
 	id: number;
+	name: string;
+	desc: string;
+	num: string;
+	status: string;
 	mobile: string;
 }
 

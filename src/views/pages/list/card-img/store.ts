@@ -85,7 +85,7 @@ const StoreModel: ModuleType = {
                 return false;
             }
         },
-        async createTableData({ commit }, payload: Pick<TableListItem, "mobile"> ) {
+        async createTableData({ commit }, payload: Pick<TableListItem, "name" | "desc" | "num" | "status" | "mobile"> ) {
             try {
                 await createData(payload);
                 return true;

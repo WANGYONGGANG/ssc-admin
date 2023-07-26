@@ -1,8 +1,8 @@
 <template>
     <a-select v-model:value="modelValue" allowClear>
       <a-select-option value="" disabled>请选择</a-select-option>
-      <a-select-option value="header">头部</a-select-option>
-      <a-select-option value="footer">底部</a-select-option>
+      <a-select-option value="1">已登记</a-select-option>
+      <a-select-option value="0">未登记</a-select-option>
     </a-select>
 </template>
 <script lang="ts">
