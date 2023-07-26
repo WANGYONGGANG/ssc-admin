@@ -6,11 +6,11 @@ const UserLayoutRoutes: RoutesDataItem[] = [
         path: 'login',
         component: () => import('@/views/user/login/index.vue'),
     },
-    {
-        title: 'user-layout.menu.register',
-        path: 'register',
-        component: () => import('@/views/user/register/index.vue'),
-    }
+    // {
+    //     title: 'user-layout.menu.register',
+    //     path: 'register',
+    //     component: () => import('@/views/user/register/index.vue'),
+    // }
 ];
 
 export default UserLayoutRoutes;

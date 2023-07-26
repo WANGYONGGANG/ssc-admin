@@ -18,11 +18,11 @@
                 <a-button type="primary" class="submit" @click="handleSubmit" :loading="submitLoading">
                     {{t('page.user.login.form.btn-submit')}}
                 </a-button>  
-                <div class="text-align-right">
+                <!-- <div class="text-align-right">
                     <router-link to="/user/register">
                         {{t('page.user.login.form.btn-jump')}}
                     </router-link>
-                </div>              
+                </div>               -->
             </a-form-item>
 
             <a-alert v-if="loginStatus === 'error' && !submitLoading" :message="t('page.user.login.form.login-error')" type="error" :show-icon="true" />
