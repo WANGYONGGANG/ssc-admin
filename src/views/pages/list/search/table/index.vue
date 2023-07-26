@@ -71,8 +71,8 @@
                     }
                 }"
             >
-                <template #imgsrc="{ text, record  }">
-                    <a :desc="record.imgsrc" target="_blank">{{text}}</a>
+                <template #imgsrc="{ record  }">
+                    <img style="max-width: 100px;max-height: 100px;" :src="record.imgsrc"/>
                 </template>
                 <template #status="{ record }">
                     <a-tag v-if="record.status == '1'" color="green">已登记</a-tag>

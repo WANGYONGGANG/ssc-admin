@@ -120,7 +120,7 @@ request.interceptors.response.use(
         const { code, token } = res;
 
         // 自定义状态码验证
-        if (code !== 0) {
+        if (code != 0) {
             return Promise.reject({
                 response,
                 message: 'CustomError',

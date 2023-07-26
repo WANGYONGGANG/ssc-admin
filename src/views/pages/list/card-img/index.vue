@@ -15,7 +15,7 @@
                 <template #header>
                     <a-row>
                         <a-col :span="8">
-                            <a-button type="primary" @click="() => setCreateFormVisible(true)">新增</a-button>
+                            <!-- <a-button type="primary" @click="() => setCreateFormVisible(true)">新增</a-button> -->
                         </a-col>
                         <a-col :span="16" class="text-align-right">
                             <a-input-search placeholder="请输入名称" style="width:270px"/>
@@ -26,8 +26,8 @@
                 </template>
 
 
-                <template #imgsrc="{ text, record  }">
-                    <a :href="record.imgsrc" target="_blank">{{text}}</a>
+                <template #imgsrc="{ record  }">
+                    <img style="max-width: 100%;max-height: 100%;" :src="record.imgsrc"/>
                 </template>
                 <template #status="{ record }">
                     <a-tag v-if="record.status == '1'" color="green">已登记</a-tag>

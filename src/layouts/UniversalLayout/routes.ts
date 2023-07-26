@@ -3,12 +3,6 @@ import { RoutesDataItem } from "@/utils/routes";
 import BlankLayout from '@/layouts/BlankLayout.vue';
 
 const IndexLayoutRoutes: Array<RoutesDataItem> = [
-  /*
-  {
-    title: 'universal-layout.menu.home',
-    path: '/home',
-    component: ()=> import('@/views/home/index.vue')
-  }, */
   {
     icon: 'home',
     title: 'universal-layout.menu.home',

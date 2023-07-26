@@ -1,7 +1,7 @@
 <template>
   <div class="layout-main-conent">
 
-    <a-row :gutter="24">
+    <!-- <a-row :gutter="24">
       <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="6">
         <ArticleChartCard />
       </a-col>
@@ -31,7 +31,7 @@
       <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
         <WorksHitCard />
       </a-col>
-    </a-row>
+    </a-row> -->
 
   </div>
 </template>
