@@ -34,7 +34,7 @@
         </div>
 
 
-        <settings></settings>
+        <!-- <settings></settings> -->
 
     </div>
 </template>

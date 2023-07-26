@@ -22,9 +22,9 @@
 
               <right-top-user />
 
-              <select-lang class="universallayout-top-selectlang" />
+              <!-- <select-lang class="universallayout-top-selectlang" /> -->
 
-              <settings></settings>
+              <!-- <settings></settings> -->
 
           </div>
       </div>
@@ -52,7 +52,7 @@
 
               <!-- <select-lang class="universallayout-top-selectlang" /> -->
 
-              <settings></settings>
+              <!-- <settings></settings> -->
 
           </div>
       </div>

@@ -40,12 +40,12 @@
 
             </div>
         </div>
-        <div v-if="topNavEnable" class="indexlayout-right-top-bot">
+        <!-- <div v-if="topNavEnable" class="indexlayout-right-top-bot">
             <div class="indexlayout-right-top-bot-home">
               <EnvironmentOutlined />
             </div>
             <bread-crumbs class="breadcrumb" :list="breadCrumbs"></bread-crumbs>
-        </div>
+        </div> -->
         <right-tab-nav v-if="tabNavEnable" :routeItem="routeItem"></right-tab-nav>
     </div>
 </template>
